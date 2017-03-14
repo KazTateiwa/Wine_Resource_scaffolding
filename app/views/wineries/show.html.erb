@@ -15,5 +15,13 @@
   <%= @winery.description %>
 </p>
 
+<p>
+  <ul>
+    <%= render partial: "wine", collection: @winery.wines %>
+  </ul>
+</p>
+
+<%= link_to 'New Wine', new_wine_path() + "?winery_id=" + @winery.id.to_s%>
+<!-- 'New Wine' is a hot fix, go back later and see a better fix for the syntax for the link. -->
 <%= link_to 'Edit', edit_winery_path(@winery) %> |
 <%= link_to 'Back', wineries_path %>

@@ -14,11 +14,27 @@ class WinesController < ApplicationController
 
   # GET /wines/new
   def new
+    # Set up a new wine
     @wine = Wine.new
+    # See if we have received a URL parameter
+    if params[:winery_id].nil?
+      # assigning default winery
+      @wine.winery = Winery.first
+    else
+      # use URL param
+      @wine.winery = Winery.find(params[:winery_id])
+    end
+
+    # Set up the winery list
     @wineries_for_select = Winery.all.map do |winery|
       [winery.name, winery.id]
     end
-    @wine.winery = Winery.first
+    
+    # @wine = Wine.new
+    # @wineries_for_select = Winery.all.map do |winery|
+    #   [winery.name, winery.id]
+    # end
+    # @wine.winery = Winery.first
   end
 
   # GET /wines/1/edit
